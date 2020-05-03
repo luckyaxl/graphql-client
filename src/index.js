@@ -1,14 +1,27 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
-import * as serviceWorker from './serviceWorker';
+import React from "react";
+import ReactDOM from "react-dom";
+import "./index.css";
+import App from "./App";
+import * as serviceWorker from "./serviceWorker";
+import {
+  createNetworkInterface,
+  AppoloClient,
+  ApolloProvider
+} from "react-apollo";
+
+const networkInterface = createNetworkInterface({
+  uri: "http://localhost:3000/graphql"
+});
+
+const client = new AppoloClient({
+  networkInterface: networkInterface
+});
 
 ReactDOM.render(
-  <React.StrictMode>
+  <ApolloProvider client={client}>
     <App />
-  </React.StrictMode>,
-  document.getElementById('root')
+  </ApolloProvider>,
+  document.getElementById("root")
 );
 
 // If you want your app to work offline and load faster, you can change
